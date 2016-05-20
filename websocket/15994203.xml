@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<TextTest version="2.1.5" time="63599299711.542" date="Friday, May 20, 2016 12:08:31 AM">
+  <task number="1" testing="False">
+    <presented>relations are very strained</presented>
+    <entry char="A" value="65" time="63599300020.91" />
+    <entry char="A" value="65" time="63599300027.237" />
+    <transcribed>AA</transcribed>
+  </task>
+  <close error="0" time="63599300036.999" date="Friday, May 20, 2016 12:13:56 AM" />
+</TextTest>
