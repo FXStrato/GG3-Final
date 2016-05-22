@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<TextTest version="2.1.5" time="63599355450.995" date="Friday, May 20, 2016 3:37:30 PM">
+  <task number="1" testing="False">
+    <presented>physics and chemistry are hard</presented>
+    <entry char="A" value="65" time="63599355488.883" />
+    <entry char="A" value="65" time="63599355493.381" />
+    <entry char="A" value="65" time="63599355493.697" />
+    <entry char="A" value="65" time="63599355493.873" />
+    <entry char="A" value="65" time="63599355494.016" />
+    <entry char="A" value="65" time="63599355500.277" />
+    <entry char="A" value="65" time="63599355501.351" />
+    <entry char="A" value="65" time="63599355501.756" />
+    <transcribed>AAAAAAAA</transcribed>
+  </task>
+  <close error="0" time="63599355661.174" date="Friday, May 20, 2016 3:41:01 PM" />
+</TextTest>
