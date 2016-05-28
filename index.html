@@ -43,19 +43,17 @@
 
 		    	<button class="btn btn-primary animated fadeInUp" id="home" style="top:-80px; left:10px; position:relative;">Home</button>
 		    	<button class="btn btn-primary animated fadeInUp" id="back" style="top: 90px; left:-55px; position:relative">Back </button>
-		    	<span>
-		    	<button class="btn btn-default animated fadeIn" id="abc" style="position:relative; left:-440px; font-size:9px;" onmousedown="showSecond('abc');" onmouseout="loseFocus()">abc</button>
-		    	<!--Secondary buttons for abc -->
-		    	<button class="btn btn-default animated fadeIn" id="a" style="position:relative; left:-480px; font-size:9px; top:-40px; display:none;" onmouseover="send('a');">a</button>
-		    	<button class="btn btn-default animated fadeIn" id="b" style="position:relative; left:-460px; font-size:9px; display:none;" onmouseover="send('b');">b</button>
-		    	<button class="btn btn-default animated fadeIn" id="c" style="position:relative; left:-550px; font-size:9px; top:40px; display:none;" onmouseover="send('c');">c</button>
-		    	</span>
 
-		    	<div class="animated fadeIn input-group" style="position:relative; top:-360px; left:80px; width: 200px;">
-		   		<input id="maininput" type="text" id="copy" class="form-control">
-		   		<span class="input-group-btn">
-       				<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
-      			</span>
+		    	<img class="animated fadeIn" id="abc" style="width: 40px; height: 40px; position:relative; left:-410px;" onClick="showSecond('abc')" onmouseout="loseFocus()" src="images/abcd.svg"/>
+		    	<!--Secondary buttons for abc -->
+		    	<img class="animated fadeIn" id="a" style="position:relative; width:30px; height: 30px; left:-448px; top:-47px; display:none" onmouseover="send('a')" src="images/a.svg"/>
+		    	<img class="animated fadeIn" id="b" style="position:relative; width:30px; height: 30px; left:-440px; top:0px; display:none" onmouseover="send('b')" src="images/b.svg"/>
+		    	<img class="animated fadeIn" id="c" style="position:relative; width:30px; height: 30px; left:-516px; top: 45px; display:none" onmouseover="send('c')" src="images/c.svg"/>
+		    	<img class="animated fadeIn" id="d" style="position:relative; width:30px; height: 30px; left:-594px; top:-0px; display:none" onmouseover="send('d')" src="images/d.svg"/>
+		    	
+
+		    	<div class="animated fadeIn input-group" style="position:relative; top:-370px; left:100px; width: 200px;">
+		   		<input id="maininput" style="border: none; background: transparent; border-bottom: 1px solid #808080; outline: none;" type="text" id="copy">
 		   		</div>
 		    </div>
 	    </div>
