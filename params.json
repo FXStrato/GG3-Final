@@ -1,6 +1,0 @@
-{
-  "name": "gg3",
-  "tagline": "Final Project for INFO 463",
-  "body": "# GG3-Final\r\nFinal Project for INFO 463\r\nToDo:\r\n- Generate testbed backend (parsing, xml creation, file streaming and output, phrase generation, randomizer)\r\n- Find a way to emulate band feature and out of screen features\r\n- Incorporate text input within screen\r\n\r\n",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
