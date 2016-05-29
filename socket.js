@@ -1,7 +1,7 @@
 var socket;
 var triq = {};
 var ascii = {};
-var fbuttons = new Array("abcd", "efgh", "ijkl");
+var fbuttons = new Array("abcd", "efgh", "ijkl", "mnop", "qrst");
 
 window.onload = function () {
 	//Creating relational dictionaries
@@ -21,6 +21,21 @@ window.onload = function () {
 	triq['j'] = ["i", "j", "k", "l"];
 	triq['k'] = ["i", "j", "k", "l"];
 	triq['l'] = ["i", "j", "k", "l"];
+	triq['mnop'] = ["m", "n", "o", "p"];
+	triq['m'] = ["m", "n", "o", "p"];
+	triq['n'] = ["m", "n", "o", "p"];
+	triq['o'] = ["m", "n", "o", "p"];
+	triq['p'] = ["m", "n", "o", "p"];
+	triq['qrst'] = ["q", "r", "s", "t"];
+	triq['q'] = ["q", "r", "s", "t"];
+	triq['r'] = ["q", "r", "s", "t"];
+	triq['s'] = ["q", "r", "s", "t"];
+	triq['t'] = ["q", "r", "s", "t"];
+	triq['uvwx'] = ["u", "v", "w", "x"];
+	triq['u'] = ["u", "v", "w", "x"];
+	triq['v'] = ["u", "v", "w", "x"];
+	triq['w'] = ["u", "v", "w", "x"];
+	triq['x'] = ["u", "v", "w", "x"];
 
 
 	//2. Letters to ascii code. Use decimal code
@@ -36,7 +51,20 @@ window.onload = function () {
 	ascii['j'] = "106";
 	ascii['k'] = "107";
 	ascii['l'] = "108";
+	ascii['m'] = "109";
+	ascii['n'] = "110";
+	ascii['o'] = "111";
+	ascii['p'] = "112";
+	ascii['q'] = "113";
+	ascii['r'] = "114";
+	ascii['s'] = "115";
+	ascii['t'] = "116";
+	ascii['u'] = "117";
+	ascii['v'] = "118";
+	ascii['w'] = "119";
+	ascii['x'] = "120";
 
+	//Attempt connection to testtext via websocket. Don't forget to run that special socket to tcp program.
 	try {
     var ip = location.host.split(":");
 	if (ip[0] == '') {
@@ -57,7 +85,7 @@ window.onload = function () {
     
 };
 
-//right now, need a function to send the ascii code of the character I want to input to testext. 
+//Sends ascii code of inputted character to testtext
 function send(data) {
 
 	if(triq[data] != -1) {
@@ -71,7 +99,6 @@ function send(data) {
 		for(i = 0; i < fbuttons.length; i++) {
 			if(fbuttons[i] != data) {
 				$("#" + fbuttons[i]).css("visibility", "visible");
-				//document.getElementById(fbuttons[i]).style.display = "inline";
 			}
 		}
 	}
@@ -152,20 +179,9 @@ function showSecond(data) {
 				}
 			}
 		}
+	} else {
+		console.log("Haven't implemented buttons yet");
 	}
-	// if(data == "abcd") {
-	// 		if(document.getElementById("a").style.display == "inline") {
-	// 			document.getElementById("a").style.display = "none";
-	// 			document.getElementById("b").style.display = "none";
-	// 			document.getElementById("c").style.display = "none";
-	// 			document.getElementById("d").style.display = "none";
-	// 		} else {
-	// 			document.getElementById("a").style.display = "inline";
-	// 			document.getElementById("b").style.display = "inline";
-	// 			document.getElementById("c").style.display = "inline";
-	// 			document.getElementById("d").style.display = "inline";
-	// 		}
-	// 	}
 }
 
 function loseFocus() {
