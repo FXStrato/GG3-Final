@@ -1,7 +1,39 @@
 var socket;
+var shift = false;
 var triq = {};
 var ascii = {};
-var fbuttons = new Array("abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx");
+var fbuttons = new Array("abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yz");
+var slider = $('#slider').CircularSlider({
+    radius: 150,
+    innerCircleRatio: '0.2',
+    handleDist: 98,
+    min: 0,
+    max: 100,
+    value: 50,
+    clockwise: true,
+    labelSuffix: "",
+    labelPrefix: "",
+    shape: "Half Circle Left",
+    touch: true,
+    animate: true,
+    animateDuration : 360,
+    selectable: false,
+    slide: function(ui, value) {},
+    onSlideEnd: function(ui, value) {
+    	if(value > 60 || value < 40) {
+    		//Go into shift mode, or get out if already in.
+    		if(!shift) {
+    			shift = true;
+    			shiftImages();
+    		} else {
+    			shift = false;
+    			shiftImages();
+    		}
+    		slider.setValue(50);
+    	}
+    },
+    formLabel: undefined
+});
 
 window.onload = function () {
 	//Creating relational dictionaries
@@ -36,9 +68,41 @@ window.onload = function () {
 	triq['v'] = ["u", "v", "w", "x"];
 	triq['w'] = ["u", "v", "w", "x"];
 	triq['x'] = ["u", "v", "w", "x"];
+	triq['yz'] = ["y", "z", "space", "del"];
+	triq['y'] = ["y", "z", "space", "del"]; 
+	triq['z'] = ["y", "z", "space", "del"]; 
+	triq['space'] = ["y", "z", "space", "del"]; 
+	triq['del'] = ["y", "z", "space", "del"]; 
+
 
 
 	//2. Letters to ascii code. Use decimal code
+	ascii['a2'] = "65";
+	ascii['b2'] = "66";
+	ascii['c2'] = "67";
+	ascii['d2'] = "68";
+	ascii['e2'] = "69";
+	ascii['f2'] = "70";
+	ascii['g2'] = "71";
+	ascii['h2'] = "72";
+	ascii['i2'] = "73";
+	ascii['j2'] = "74";
+	ascii['k2'] = "75";
+	ascii['l2'] = "76";
+	ascii['m2'] = "77";
+	ascii['n2'] = "78";
+	ascii['o2'] = "79";
+	ascii['p2'] = "80";
+	ascii['q2'] = "81";
+	ascii['r2'] = "82";
+	ascii['s2'] = "83";
+	ascii['t2'] = "84";
+	ascii['u2'] = "85";
+	ascii['v2'] = "86";
+	ascii['w2'] = "87";
+	ascii['x2'] = "88";
+	ascii['y2'] = "89";
+	ascii['z2'] = "90";
 	ascii['a'] = "97";
 	ascii['b'] = "98";
 	ascii['c'] = "99";
@@ -63,25 +127,10 @@ window.onload = function () {
 	ascii['v'] = "118";
 	ascii['w'] = "119";
 	ascii['x'] = "120";
-
-	//Attempt connection to testtext via websocket. Don't forget to run that special socket to tcp program.
-	try {
-    var ip = location.host.split(":");
-	if (ip[0] == '') {
-        ip[0] = "localhost";
-    }
-	socket = new WebSocket("ws://" + ip[0] + ":9000");
-
-    socket.onopen = function (event) {
-        
-    };
-
-    socket.onmessage = function (event) {
-        console.log(event.data);
-	    };
-	} catch(err) {
-		console.log("Unable to connect through websocket to TextTest");
-	}
+	ascii['y'] = "121";
+	ascii['z'] = "122";
+	ascii["space"] = "32";
+	ascii['del'] = "8";
     
 };
 
@@ -92,67 +141,34 @@ function send(data) {
 		for(i = 0; i < triq[data].length; i++) {
 			document.getElementById(triq[data][i]).style.display = "none";
 		}
+
 		var result = document.getElementById("maininput").value;
-		result += data;
+		//Check for space or delete
+		if(data == "space") {
+			result += " ";
+			socket.send(ascii[data]);
+		} else if (data =="del") {
+			result = result.slice(0,-1);
+			socket.send(ascii[data]);
+		} else {
+			//if shift mode is on, then make it upper case.
+			if(shift) {
+				result += data.toUpperCase();
+				var packet = data + "2";
+				socket.send(ascii[packet]);
+			} else {
+				result += data;
+				socket.send(ascii[data]);
+			}
+		}
 		document.getElementById("maininput").value = result;
-		document.activeElement.blur();
+		loseFocus();
 		for(i = 0; i < fbuttons.length; i++) {
 			if(fbuttons[i] != data) {
 				$("#" + fbuttons[i]).css("visibility", "visible");
 			}
 		}
 	}
-
-	// if(data == "A") {
-	// 	console.log("A was printed");
-	// 	//socket.send("65");
-	// }
-	// else if(data == "a") {
-	// 	var result = document.getElementById("maininput").value;
-	// 	result += "a";
-	// 	document.getElementById("maininput").value = result;
-	// 	document.activeElement.blur();
-	// 	document.getElementById("a").style.display = "none";
-	// 	document.getElementById("b").style.display = "none";
-	// 	document.getElementById("c").style.display = "none";
-	// 	document.getElementById("d").style.display = "none";
-
-	// 	//socket.send("65");
-	// }
-	// else if(data == "b") {
-	// 	var result = document.getElementById("maininput").value;
-	// 	result += "b";
-	// 	document.getElementById("maininput").value = result;
-	// 	document.activeElement.blur();
-	// 	document.getElementById("a").style.display = "none";
-	// 	document.getElementById("b").style.display = "none";
-	// 	document.getElementById("c").style.display = "none";
-	// 	document.getElementById("d").style.display = "none";
-	// 	//socket.send("65");
-	// }
-	// else if(data == "c") {
-	// 	var result = document.getElementById("maininput").value;
-	// 	result += "c";
-	// 	document.getElementById("maininput").value = result;
-	// 	document.activeElement.blur();
-	// 	document.getElementById("a").style.display = "none";
-	// 	document.getElementById("b").style.display = "none";
-	// 	document.getElementById("c").style.display = "none";
-	// 	document.getElementById("d").style.display = "none";
-
-	// 	//socket.send("65");
-	// } else if(data == "d") {
-	// 	var result = document.getElementById("maininput").value;
-	// 	result += "d";
-	// 	document.getElementById("maininput").value = result;
-	// 	document.activeElement.blur();
-	// 	document.getElementById("a").style.display = "none";
-	// 	document.getElementById("b").style.display = "none";
-	// 	document.getElementById("c").style.display = "none";
-	// 	document.getElementById("d").style.display = "none";
-
-	// 	//socket.send("65");
-	// }
 }
 
 function showSecond(data) {
@@ -185,7 +201,60 @@ function showSecond(data) {
 }
 
 function loseFocus() {
-	document.activeElement.blur();
+	document.getElementById('maininput').focus();
+}
+
+
+function connect() {
+	//Attempt connection to testtext via websocket. Don't forget to run that special socket to tcp program.
+	document.getElementById('check').value = "Loading...";
+	document.getElementById('checkbtn').innerHTML = "Loading";
+	    var ip = location.host.split(":");
+		if (ip[0] == '') {
+	        ip[0] = "localhost";
+	    }
+		socket = new WebSocket("ws://" + ip[0] + ":9000");
+
+	    socket.onopen = function (event) {
+	        document.getElementById('check').value = "Socket created. Make sure tcp/socket program is connected.";
+	        document.getElementById('checkbtn').innerHTML = "Reconnect";
+	    };
+
+	    socket.onmessage = function (event) {
+		};
+
+		socket.onerror = function (event) {
+			document.getElementById('check').value = "Socket could not connect.";
+			document.getElementById('checkbtn').innerHTML = "Attempt reconnect";
+		};
+
+		loseFocus();
+}
+
+function clearinput() {
+	var result = "";
+	document.getElementById("maininput").value = result;
+	loseFocus();
+}
+
+//Change images depending on if shift mode is activated.
+function shiftImages() {
+	if(shift) {
+		for(var key in triq) {
+	    	if(key == "space" || key == "del") {
+	    	} else {
+	    		document.getElementById(key).src = "images/" + key + "2.svg";
+	    	}
+	    }
+	} else {
+		for(var key in triq) {
+	    	if(key == "space" || key == "del") {
+	    	} else {
+	    		document.getElementById(key).src = "images/" + key + ".svg";
+	    	}
+   		}
+	}
+    
 }
 
 //Sending keystroke:::: socket.send(keyCode.toString());
