@@ -146,19 +146,19 @@ function send(data) {
 		//Check for space or delete
 		if(data == "space") {
 			result += " ";
-			socket.send(ascii[data]);
+			//socket.send(ascii[data]);
 		} else if (data =="del") {
 			result = result.slice(0,-1);
-			socket.send(ascii[data]);
+			//socket.send(ascii[data]);
 		} else {
 			//if shift mode is on, then make it upper case.
 			if(shift) {
 				result += data.toUpperCase();
 				var packet = data + "2";
-				socket.send(ascii[packet]);
+				//socket.send(ascii[packet]);
 			} else {
 				result += data;
-				socket.send(ascii[data]);
+				//socket.send(ascii[data]);
 			}
 		}
 		document.getElementById("maininput").value = result;
