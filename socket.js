@@ -1,7 +1,7 @@
 var socket;
 var triq = {};
 var ascii = {};
-var fbuttons = new Array("abcd", "efgh", "ijkl", "mnop", "qrst");
+var fbuttons = new Array("abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx");
 
 window.onload = function () {
 	//Creating relational dictionaries
