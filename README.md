@@ -1,4 +1,6 @@
 # GG3-Final
+Live Site without TextTest: http://fxstrato.github.io/GG3-Final/
+
 README for INFO 463 Final Project
 
 Pre Req: 
